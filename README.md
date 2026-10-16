@@ -22,7 +22,7 @@ DSH 的内核由两部分构成，本仓库实现这两部分：
 
 ## 设计原则
 
-### 只移植语义，不移植 JS 机制
+### 移植功能 优化性能
 
 上游内核大量依赖 JavaScript 的反射能力，这些在 Go 中**没有对应物，也不需要对应物**：
 
@@ -59,7 +59,7 @@ const JsExpr = new yaml.Type('tag:yaml.org,2002:js', {
 export const entryListSchema = yaml.JSON_SCHEMA.extend(JsExpr)
 ```
 
-由此推出的可观测行为（均以金标准测试钉住）：
+由此推出的可观测行为（均被测试标记）：
 
 - `yes` / `no` / `on` / `off` 是**字符串**（JSON_SCHEMA 不含 YAML 1.1 bool）
 - `2026-01-01` 是**字符串**（不含 timestamp 类型）
@@ -89,15 +89,9 @@ export const entryListSchema = yaml.JSON_SCHEMA.extend(JsExpr)
 
 ## 许可证
 
-[CC BY-NC 4.0](./LICENSE) —— 与 [RP-Hub](https://github.com/STA1N156/RP-Hub) 相同。
+[CC BY-NC 4.0](./LICENSE)
 
 **明确禁止任何形式的商业化使用。** 任何使用者必须遵守该协议，尊重原作者的署名权。
-
-## 标准
-
-**永远以 [STA1N156/RP-Hub](https://github.com/STA1N156/RP-Hub) 的官方最新版为唯一标准。**
-
-当前钉版：commit [`3e7c706`](https://github.com/STA1N156/RP-Hub/commit/3e7c7064e2c72085d18e729fb2c0260c1894ae2c)（2026-10-15）。
 
 ---
 
