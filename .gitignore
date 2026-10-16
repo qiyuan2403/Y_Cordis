@@ -9,8 +9,12 @@
 go.work
 go.work.sum
 
-# Local workspace data (card workspaces, session logs)
-/workspace/
+# Session logs written beside the executable during local runs.
+#
+# NOTE: no `/workspace/` rule here. `workspace/` is a SOURCE PACKAGE in this
+# repository, and ignoring it silently excluded the package from every commit
+# (and therefore from the v0.0.1 tag). Runtime card workspaces live under the
+# harness home, which is outside the tree.
 /sessions/
 *.local.*
 
