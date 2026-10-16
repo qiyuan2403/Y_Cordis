@@ -1,0 +1,227 @@
+{
+ "t": "seq",
+ "v": [
+  {
+   "t": "map",
+   "v": [
+    [
+     "id",
+     {
+      "t": "str",
+      "v": "system-prompt"
+     }
+    ],
+    [
+     "config",
+     {
+      "t": "map",
+      "v": [
+       [
+        "personaPrefix",
+        {
+         "t": "str",
+         "v": "You are a coding agent powered by the {{model}} model."
+        }
+       ]
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "t": "map",
+   "v": [
+    [
+     "id",
+     {
+      "t": "str",
+      "v": "tools"
+     }
+    ],
+    [
+     "config",
+     {
+      "t": "map",
+      "v": [
+       [
+        "mode",
+        {
+         "t": "js",
+         "v": "process.env.DSH_TOOLS_MODE"
+        }
+       ]
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "t": "map",
+   "v": [
+    [
+     "insert",
+     {
+      "t": "seq",
+      "v": [
+       {
+        "t": "map",
+        "v": [
+         [
+          "id",
+          {
+           "t": "str",
+           "v": "headless-startup"
+          }
+         ],
+         [
+          "name",
+          {
+           "t": "str",
+           "v": "@deepseek-ai/dsh-headless/startup"
+          }
+         ]
+        ]
+       },
+       {
+        "t": "map",
+        "v": [
+         [
+          "id",
+          {
+           "t": "str",
+           "v": "headless-runner"
+          }
+         ],
+         [
+          "name",
+          {
+           "t": "str",
+           "v": "@deepseek-ai/dsh-headless"
+          }
+         ],
+         [
+          "inject",
+          {
+           "t": "seq",
+           "v": [
+            {
+             "t": "str",
+             "v": "headlessStartup"
+            }
+           ]
+          }
+         ],
+         [
+          "config",
+          {
+           "t": "map",
+           "v": [
+            [
+             "task",
+             {
+              "t": "js",
+              "v": "ctx.headlessStartup.task"
+             }
+            ],
+            [
+             "sessionId",
+             {
+              "t": "js",
+              "v": "ctx.headlessStartup.sessionId"
+             }
+            ],
+            [
+             "json",
+             {
+              "t": "js",
+              "v": "ctx.headlessStartup.json"
+             }
+            ]
+           ]
+          }
+         ]
+        ]
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "t": "map",
+   "v": [
+    [
+     "id",
+     {
+      "t": "str",
+      "v": "hmr"
+     }
+    ],
+    [
+     "disabled",
+     {
+      "t": "bool",
+      "v": true
+     }
+    ]
+   ]
+  },
+  {
+   "t": "map",
+   "v": [
+    [
+     "id",
+     {
+      "t": "str",
+      "v": "credentials"
+     }
+    ],
+    [
+     "disabled",
+     {
+      "t": "bool",
+      "v": true
+     }
+    ]
+   ]
+  },
+  {
+   "t": "map",
+   "v": [
+    [
+     "id",
+     {
+      "t": "str",
+      "v": "authorization"
+     }
+    ],
+    [
+     "disabled",
+     {
+      "t": "bool",
+      "v": true
+     }
+    ]
+   ]
+  },
+  {
+   "t": "map",
+   "v": [
+    [
+     "id",
+     {
+      "t": "str",
+      "v": "deepseek-account"
+     }
+    ],
+    [
+     "disabled",
+     {
+      "t": "bool",
+      "v": true
+     }
+    ]
+   ]
+  }
+ ]
+}

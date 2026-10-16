@@ -1,0 +1,308 @@
+{
+ "t": "map",
+ "v": [
+  [
+   "yes",
+   {
+    "t": "str",
+    "v": "yes"
+   }
+  ],
+  [
+   "no",
+   {
+    "t": "str",
+    "v": "no"
+   }
+  ],
+  [
+   "on",
+   {
+    "t": "str",
+    "v": "on"
+   }
+  ],
+  [
+   "off",
+   {
+    "t": "str",
+    "v": "off"
+   }
+  ],
+  [
+   "y",
+   {
+    "t": "str",
+    "v": "y"
+   }
+  ],
+  [
+   "n",
+   {
+    "t": "str",
+    "v": "n"
+   }
+  ],
+  [
+   "t_true",
+   {
+    "t": "bool",
+    "v": true
+   }
+  ],
+  [
+   "t_True",
+   {
+    "t": "bool",
+    "v": true
+   }
+  ],
+  [
+   "t_TRUE",
+   {
+    "t": "bool",
+    "v": true
+   }
+  ],
+  [
+   "t_false",
+   {
+    "t": "bool",
+    "v": false
+   }
+  ],
+  [
+   "t_False",
+   {
+    "t": "bool",
+    "v": false
+   }
+  ],
+  [
+   "t_FALSE",
+   {
+    "t": "bool",
+    "v": false
+   }
+  ],
+  [
+   "n_null",
+   {
+    "t": "null"
+   }
+  ],
+  [
+   "n_Null",
+   {
+    "t": "null"
+   }
+  ],
+  [
+   "n_NULL",
+   {
+    "t": "null"
+   }
+  ],
+  [
+   "n_tilde",
+   {
+    "t": "null"
+   }
+  ],
+  [
+   "n_empty",
+   {
+    "t": "null"
+   }
+  ],
+  [
+   "date",
+   {
+    "t": "str",
+    "v": "2026-01-01"
+   }
+  ],
+  [
+   "datetime",
+   {
+    "t": "str",
+    "v": "2026-01-01T00:00:00Z"
+   }
+  ],
+  [
+   "i_zero",
+   {
+    "t": "num",
+    "v": "0"
+   }
+  ],
+  [
+   "i_neg",
+   {
+    "t": "num",
+    "v": "-1"
+   }
+  ],
+  [
+   "i_pos",
+   {
+    "t": "num",
+    "v": "1"
+   }
+  ],
+  [
+   "i_dec",
+   {
+    "t": "num",
+    "v": "10"
+   }
+  ],
+  [
+   "i_lead0",
+   {
+    "t": "num",
+    "v": "10"
+   }
+  ],
+  [
+   "i_bin",
+   {
+    "t": "num",
+    "v": "10"
+   }
+  ],
+  [
+   "i_oct",
+   {
+    "t": "num",
+    "v": "15"
+   }
+  ],
+  [
+   "i_hex",
+   {
+    "t": "num",
+    "v": "16"
+   }
+  ],
+  [
+   "i_underscore",
+   {
+    "t": "str",
+    "v": "1_000"
+   }
+  ],
+  [
+   "f_dot",
+   {
+    "t": "num",
+    "v": "1.5"
+   }
+  ],
+  [
+   "f_lead",
+   {
+    "t": "num",
+    "v": "0.5"
+   }
+  ],
+  [
+   "f_exp",
+   {
+    "t": "num",
+    "v": "1000"
+   }
+  ],
+  [
+   "f_neg",
+   {
+    "t": "num",
+    "v": "-1.5"
+   }
+  ],
+  [
+   "f_inf",
+   {
+    "t": "num",
+    "v": "Infinity"
+   }
+  ],
+  [
+   "f_ninf",
+   {
+    "t": "num",
+    "v": "-Infinity"
+   }
+  ],
+  [
+   "f_nan",
+   {
+    "t": "num",
+    "v": "NaN"
+   }
+  ],
+  [
+   "s_inf",
+   {
+    "t": "str",
+    "v": "inf"
+   }
+  ],
+  [
+   "s_nan",
+   {
+    "t": "str",
+    "v": "nan"
+   }
+  ],
+  [
+   "s_quoted",
+   {
+    "t": "str",
+    "v": "1"
+   }
+  ],
+  [
+   "s_single",
+   {
+    "t": "str",
+    "v": "1"
+   }
+  ],
+  [
+   "s_tagged",
+   {
+    "t": "str",
+    "v": "1"
+   }
+  ],
+  [
+   "s_plain",
+   {
+    "t": "str",
+    "v": "abc"
+   }
+  ],
+  [
+   "s_spaces",
+   {
+    "t": "str",
+    "v": "a b"
+   }
+  ],
+  [
+   "js_expr",
+   {
+    "t": "js",
+    "v": "process.env.X ?? 'd'"
+   }
+  ],
+  [
+   "js_complex",
+   {
+    "t": "js",
+    "v": "!ctx.get('profileContext')"
+   }
+  ]
+ ]
+}

@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, ubuntu-24.04-arm, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      # The jsbridge package executes JavaScript. Node must be present or a
+      # large part of the suite SKIPS instead of running, which would make a
+      # green build meaningless. Node ships on the GitHub runners; this step
+      # only asserts that fact so the requirement is explicit.
+      - name: Require node
+        shell: bash
+        run: node --version
+
+      - name: gofmt
+        shell: bash
+        run: |
+          unformatted=$(gofmt -l .)
+          if [ -n "$unformatted" ]; then
+            echo "gofmt found unformatted files:"
+            echo "$unformatted"
+            exit 1
+          fi
+
+      - name: vet
+        run: go vet ./...
+
+      - name: build
+        run: go build ./...
+
+      # Node is required, so a skip is a FAILURE rather than a pass: a suite
+      # that silently skips its load-bearing cases reports success it did not
+      # earn. The env var makes the test helpers turn "node unavailable" into
+      # a hard error.
+      - name: test
+        env:
+          Y_CORDIS_REQUIRE_NODE: "1"
+        run: go test ./... -count=1 -timeout 10m

@@ -1,0 +1,249 @@
+{
+ "t": "seq",
+ "v": [
+  {
+   "t": "map",
+   "v": [
+    [
+     "id",
+     {
+      "t": "str",
+      "v": "session-title-llm"
+     }
+    ],
+    [
+     "disabled",
+     {
+      "t": "bool",
+      "v": true
+     }
+    ]
+   ]
+  },
+  {
+   "t": "map",
+   "v": [
+    [
+     "insert",
+     {
+      "t": "seq",
+      "v": [
+       {
+        "t": "map",
+        "v": [
+         [
+          "id",
+          {
+           "t": "str",
+           "v": "sdk-app-startup"
+          }
+         ],
+         [
+          "name",
+          {
+           "t": "str",
+           "v": "@deepseek-ai/dsh-sdk-app"
+          }
+         ],
+         [
+          "config",
+          {
+           "t": "map",
+           "v": [
+            [
+             "profile",
+             {
+              "t": "str",
+              "v": "sdk"
+             }
+            ]
+           ]
+          }
+         ]
+        ]
+       },
+       {
+        "t": "map",
+        "v": [
+         [
+          "id",
+          {
+           "t": "str",
+           "v": "sdk-jsonrpc-server"
+          }
+         ],
+         [
+          "name",
+          {
+           "t": "str",
+           "v": "@deepseek-ai/dsh-sdk-jsonrpc-server"
+          }
+         ],
+         [
+          "inject",
+          {
+           "t": "seq",
+           "v": [
+            {
+             "t": "str",
+             "v": "sdkAppStartup"
+            },
+            {
+             "t": "str",
+             "v": "loader"
+            }
+           ]
+          }
+         ],
+         [
+          "config",
+          {
+           "t": "map",
+           "v": [
+            [
+             "maxTokensAsSuccess",
+             {
+              "t": "js",
+              "v": "process.env.DSH_MAX_TOKENS_AS_SUCCESS === undefined ? true : JSON.parse(process.env.DSH_MAX_TOKENS_AS_SUCCESS)"
+             }
+            ]
+           ]
+          }
+         ]
+        ]
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "t": "map",
+   "v": [
+    [
+     "id",
+     {
+      "t": "str",
+      "v": "hmr"
+     }
+    ],
+    [
+     "disabled",
+     {
+      "t": "bool",
+      "v": true
+     }
+    ]
+   ]
+  },
+  {
+   "t": "map",
+   "v": [
+    [
+     "insert",
+     {
+      "t": "seq",
+      "v": [
+       {
+        "t": "map",
+        "v": [
+         [
+          "id",
+          {
+           "t": "str",
+           "v": "workspace-dependencies"
+          }
+         ],
+         [
+          "name",
+          {
+           "t": "str",
+           "v": "@deepseek-ai/dsh-tool-workspace-dependencies"
+          }
+         ],
+         [
+          "disabled",
+          {
+           "t": "js",
+           "v": "!(process.env.DSH_PRIMARY_RUNTIME ?? process.env.DSH_BUNDLED_PRIMARY_RUNTIME)"
+          }
+         ],
+         [
+          "config",
+          {
+           "t": "map",
+           "v": [
+            [
+             "source",
+             {
+              "t": "js",
+              "v": "process.getBuiltinModule('node:path').resolve(process.env.DSH_PRIMARY_RUNTIME ?? process.env.DSH_BUNDLED_PRIMARY_RUNTIME ?? '')"
+             }
+            ]
+           ]
+          }
+         ]
+        ]
+       },
+       {
+        "t": "map",
+        "v": [
+         [
+          "id",
+          {
+           "t": "str",
+           "v": "skill-office"
+          }
+         ],
+         [
+          "name",
+          {
+           "t": "str",
+           "v": "@deepseek-ai/dsh-skill-office"
+          }
+         ],
+         [
+          "disabled",
+          {
+           "t": "js",
+           "v": "!(process.env.DSH_PRIMARY_RUNTIME ?? process.env.DSH_BUNDLED_PRIMARY_RUNTIME) && !process.env.DSH_BUNDLED_OFFICE_CLI"
+          }
+         ],
+         [
+          "config",
+          {
+           "t": "map",
+           "v": [
+            [
+             "assetRoot",
+             {
+              "t": "js",
+              "v": "process.env.DSH_BUNDLED_OFFICE_SKILLS ?? process.getBuiltinModule('node:path').resolve(process.env.DSH_PRIMARY_RUNTIME ?? process.env.DSH_BUNDLED_PRIMARY_RUNTIME ?? '', '..', 'office-skills')"
+             }
+            ],
+            [
+             "cli",
+             {
+              "t": "js",
+              "v": "process.env.DSH_BUNDLED_OFFICE_CLI === '' ? false : process.env.DSH_BUNDLED_OFFICE_CLI"
+             }
+            ],
+            [
+             "node",
+             {
+              "t": "js",
+              "v": "process.env.DSH_BUNDLED_OFFICE_NODE ?? process.getBuiltinModule('node:path').resolve(process.env.DSH_PRIMARY_RUNTIME ?? process.env.DSH_BUNDLED_PRIMARY_RUNTIME ?? '', 'dependencies', 'node', 'bin', process.platform === 'win32' ? 'node.exe' : 'node')"
+             }
+            ]
+           ]
+          }
+         ]
+        ]
+       }
+      ]
+     }
+    ]
+   ]
+  }
+ ]
+}

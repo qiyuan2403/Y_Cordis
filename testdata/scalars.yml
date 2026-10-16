@@ -1,0 +1,44 @@
+yes: yes
+no: no
+on: on
+off: off
+y: y
+n: n
+t_true: true
+t_True: True
+t_TRUE: TRUE
+t_false: false
+t_False: False
+t_FALSE: FALSE
+n_null: null
+n_Null: Null
+n_NULL: NULL
+n_tilde: ~
+n_empty:
+date: 2026-01-01
+datetime: 2026-01-01T00:00:00Z
+i_zero: 0
+i_neg: -1
+i_pos: +1
+i_dec: 10
+i_lead0: 010
+i_bin: 0b1010
+i_oct: 0o17
+i_hex: 0x10
+i_underscore: 1_000
+f_dot: 1.5
+f_lead: .5
+f_exp: 1e3
+f_neg: -1.5
+f_inf: .inf
+f_ninf: -.inf
+f_nan: .nan
+s_inf: inf
+s_nan: nan
+s_quoted: "1"
+s_single: '1'
+s_tagged: !!str 1
+s_plain: abc
+s_spaces: a b
+js_expr: !!js process.env.X ?? 'd'
+js_complex: !!js "!ctx.get('profileContext')"
