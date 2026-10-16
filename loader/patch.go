@@ -112,6 +112,12 @@ func ApplyPatches(data []Value, patches []*Patch, warn func(msg string, args ...
 
 	for _, patch := range patches {
 		if len(patch.Insert) > 0 {
+			// Clone the inserted rows before they enter the tree. The official
+			// code relies on the patch list being re-parsed from YAML on every
+			// application; a Go host that CACHES the parsed patches (the normal
+			// case for a hot-reloaded config) would otherwise mutate them here,
+			// and the mutation would leak into every later application.
+			insert := cloneSeq(patch.Insert)
 			if patch.ID != "" {
 				target, ok := entryMap[patch.ID]
 				if !ok {
@@ -128,15 +134,15 @@ func ApplyPatches(data []Value, patches []*Patch, warn func(msg string, args ...
 				if !ok {
 					seq = []Value{}
 				}
-				seq = append(seq, patch.Insert...)
+				seq = append(seq, insert...)
 				target.Set("config", seq)
 			} else {
-				data = append(data, patch.Insert...)
+				data = append(data, insert...)
 			}
 			// Index what this patch added so a LATER patch in the same list can
 			// target it. Patch lists compose one layer per source, and a layer
 			// must be able to configure a row an earlier layer inserted.
-			buildMap(patch.Insert)
+			buildMap(insert)
 			continue
 		}
 
