@@ -1,0 +1,19 @@
+# Build artifacts
+/bin/
+/dist/
+*.exe
+*.test
+*.out
+
+# Go workspace
+go.work
+go.work.sum
+
+# Local workspace data (card workspaces, session logs)
+/workspace/
+/sessions/
+*.local.*
+
+# OS
+.DS_Store
+Thumbs.db
