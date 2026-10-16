@@ -54,6 +54,12 @@ type Config struct {
 	// Dir is the base directory for per-worker temporary working directories.
 	// Empty uses the system temp dir.
 	Dir string
+	// RequireRoot is a directory whose node_modules resolves `import()`
+	// specifiers. When set, the worker script is placed under it, so module
+	// resolution walks up from the script to RequireRoot/node_modules — the
+	// path an npm profile installs plugins into. Empty leaves resolution at
+	// the ExecRoot/temp default.
+	RequireRoot string
 	// ExecRoot is a directory that can hold the worker SCRIPT and must be
 	// executable. Empty probes the temp dir and falls back to it only when the
 	// probe passes.
@@ -396,7 +402,14 @@ func nodeArgs(cfg Config) []string {
 	if cfg.AllowFsRead {
 		args = append(args, "--allow-fs-read=*")
 	}
-	for _, path := range cfg.AllowFsReadPaths {
+	allowed := cfg.AllowFsReadPaths
+	if cfg.RequireRoot != "" {
+		// The require root exists to be imported from; a read grant over it
+		// is the feature, not a leak. Without it --permission blocks the
+		// resolution the root was configured for.
+		allowed = append(allowed, cfg.RequireRoot)
+	}
+	for _, path := range allowed {
 		args = append(args, "--allow-fs-read="+path)
 	}
 	if cfg.AllowChildProcess {
@@ -448,6 +461,11 @@ func defaultPoolSize() int {
 // falls through to the next rather than producing a script that cannot run.
 func writeEmbeddedWorker(cfg Config) (string, error) {
 	candidates := []string{}
+	if cfg.RequireRoot != "" {
+		// First: the require root. The worker script under it makes
+		// RequireRoot/node_modules the resolution anchor for `import()`.
+		candidates = append(candidates, filepath.Join(cfg.RequireRoot, "jsbridge-scripts"))
+	}
 	if cfg.ExecRoot != "" {
 		candidates = append(candidates, cfg.ExecRoot)
 	}
